@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 1대1 전적 검색
+  input(type='text' id='criteria')
+  input(type='text' id='target')
+  button(id='search-btn' ) 검색
+
+  table
+    th 매치 결과
+    th 슈팅
+    th 유효 슈팅
+    th 골
+    th 패스 성공률
+    th 오프사이드
+    th 슈팅
+    tr(id='resultList')
+
+
