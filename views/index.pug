@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1 1대1 전적 검색
-  input(type='text' id='criteria')
-  input(type='text' id='target')
+  input(type='text' id='criteria-user')
+  input(type='text' id='target-user')
   button(id='search-btn' ) 검색
 
   table
@@ -14,6 +14,6 @@ block content
     th 패스 성공률
     th 오프사이드
     th 슈팅
-    tr(id='resultList')
+    tr(id='result-list')
 
-
+  script(src='/javascripts/indexHandler.js')
