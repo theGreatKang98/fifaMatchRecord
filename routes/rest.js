@@ -1,17 +1,26 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 require("dotenv").config();
 
-router.post('/matches', async function (req, res, next) {
+router.post('/user', async (req, res) => {
+    const nickname = req.body.nickname;
+    const accessId = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users?nickname=${nickname}`,
+        {headers: {'Authorization': process.env.API_KEY}})
+        .then(i => i.json());
+    res.send(accessId);
+})
+
+router.post('/matches', async  (req, res, _) => {
+    console.log('body',req.body);
     const accessId = req.body.accessId;
-    const matchIds = (await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=50&limit=10`,
-        {headers: {'Authorization': process.env.API_KEY}}
-    ).then(i => i.json()));
+    const matchIds = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=40&limit=10`,
+        {headers: {'Authorization': process.env.API_KEY}})
+        .then(i => i.json());
     console.log(matchIds);
     res.send(matchIds);
 });
 
-router.post('/match-infos', async function (req, res, next) {
+router.post('/match-infos', async (req, res, _) => {
     const matchIds = req.body.matchIds;
     const matchInfos = await Promise.all(matchIds.map(async matchId => {
         const res = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/matches/${matchId}`,
