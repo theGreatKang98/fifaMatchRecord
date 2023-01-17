@@ -1,8 +1,42 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+@media (prefers-color-scheme: light) {
+  /* 라이트 모드에 적용할 스타일 정의 */
+  body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+
+
 }
 
-a {
-  color: #00B7FF;
+@media (prefers-color-scheme: dark) {
+  /* 다크 모드에 적용할 스타일 정의 */
+  body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: #333333;
+  }
+
+  a {
+    color: #00B7FF;
+  }
+
+  .table {
+    border: 1px;
+    width: 80vh;
+    text-align: center;
+  }
+
+  .skyblue {
+    background-color: skyblue;
+  }
+
+  .pink {
+    background-color: pink;
+  }
+  .gray {
+    background-color: gray;
+  }
+
 }

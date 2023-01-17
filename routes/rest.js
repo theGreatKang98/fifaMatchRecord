@@ -11,12 +11,10 @@ router.post('/user', async (req, res) => {
 })
 
 router.post('/matches', async  (req, res, _) => {
-    console.log('body',req.body);
     const accessId = req.body.accessId;
-    const matchIds = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=40&limit=10`,
+    const matchIds = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=40&limit=100`,
         {headers: {'Authorization': process.env.API_KEY}})
         .then(i => i.json());
-    console.log(matchIds);
     res.send(matchIds);
 });
 
@@ -27,7 +25,6 @@ router.post('/match-infos', async (req, res, _) => {
             {headers: {'Authorization': process.env.API_KEY}})
         return res.json();
     }));
-    console.log(matchInfos);
     res.send(matchInfos);
 });
 

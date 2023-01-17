@@ -2,19 +2,22 @@ extends layout
 
 block content
   h1 1대1 전적 검색
-  input(type='text' id='criteria-user')
-  input(type='text' id='target-user')
-  button(id='search-btn' ) 검색
+  form(id='search-form' )
+    input(type='text' id='criteria-user' required=true)
+    input(type='text' id='target-user' required=true)
+    input(type='submit' value='검색')
 
-  table
-    th 매치 결과
-    th 슈팅
-    th 유효 슈팅
-    th 골
-    th 패스 성공률
-    th 오프사이드
-    th 슈팅
-    th 매치 일시
-    tr(id='result-list')
+  table(id='match-info-table' class='table')
+    tbody
+      tr(id='table-title')
+        th 승패
+        th 슈팅횟수
+        th 유효슈팅
+        th 골
+        th 패스시도수
+        th 패스성공률
+        th 오프사이드
+        th 매치일시
+
 
   script(src='/javascripts/indexHandler.js')
