@@ -5,29 +5,6 @@
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   }
-
-
-}
-
-@media (prefers-color-scheme: dark) {
-  /* 다크 모드에 적용할 스타일 정의 */
-  body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    color: white;
-    background-color: #333333;
-  }
-
-  a {
-    color: #00B7FF;
-  }
-
-  .table {
-    border: 1px;
-    width: 80vh;
-    text-align: center;
-  }
-
   .skyblue {
     background-color: skyblue;
   }
@@ -38,5 +15,51 @@
   .gray {
     background-color: gray;
   }
-
 }
+
+@media (prefers-color-scheme: dark) {
+  /* 다크 모드에 적용할 스타일 정의 */
+  body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: white;
+    background-color: #333333;
+  }
+  .skyblue {
+    background-color: deepskyblue;
+  }
+  .pink {
+    background-color: deeppink;
+  }
+  .gray {
+    background-color: darkgray;
+  }
+}
+
+
+#container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+#match-info-wrapper {
+  width: 70%;
+}
+#summary-wrapper {
+  width: 30%;
+}
+#view-more-btn{
+  display: block;
+  margin: 0 auto;
+  visibility: hidden;
+}
+a {
+  color: #00B7FF;
+}
+
+.table {
+  border: 1px;
+  text-align: center;
+  width: 80%;
+}
+

@@ -12,7 +12,8 @@ router.post('/user', async (req, res) => {
 
 router.post('/matches', async  (req, res, _) => {
     const accessId = req.body.accessId;
-    const matchIds = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=40&limit=100`,
+    const offset = req.body.offset;
+    const matchIds = await fetch(`https://api.nexon.co.kr/fifaonline4/v1.0/users/${accessId}/matches?matchtype=40&offset=${offset}&limit=100`,
         {headers: {'Authorization': process.env.API_KEY}})
         .then(i => i.json());
     res.send(matchIds);

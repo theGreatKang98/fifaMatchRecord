@@ -7,17 +7,30 @@ block content
     input(type='text' id='target-user' required=true)
     input(type='submit' value='검색')
 
-  table(id='match-info-table' class='table')
-    tbody
-      tr(id='table-title')
-        th 승패
-        th 슈팅횟수
-        th 유효슈팅
-        th 골
-        th 패스시도수
-        th 패스성공률
-        th 오프사이드
-        th 매치일시
-
+  div(id='container')
+    div(id='match-info-wrapper')
+      table(id='match-info-table' class='table')
+        tbody
+          tr(id='table-title')
+            th 승패
+            th 슈팅횟수
+            th 유효슈팅
+            th 골
+            th 패스시도수
+            th 패스성공률
+            th 오프사이드
+            th 매치일시
+      button(id='view-more-btn') 더보기
+    div(id='summary-wrapper')
+      table(id='summary-table' class='table')
+        tbody
+          tr
+            th 매치수
+            th 승률
+            th 총골
+          tr(id='summary-values')
+            td
+            td
+            td
 
   script(src='/javascripts/indexHandler.js')
