@@ -1,4 +1,5 @@
 const express = require('express');
+import fetch from 'cross-fetch';
 const router = express.Router();
 require("dotenv").config();
 
