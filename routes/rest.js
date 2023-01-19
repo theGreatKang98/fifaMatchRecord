@@ -26,6 +26,7 @@ router.post('/match-infos', async (req, res, _) => {
             {headers: {'Authorization': process.env.API_KEY}})
         return res.json();
     }));
+    console.log(matchInfos);
     res.send(matchInfos);
 });
 

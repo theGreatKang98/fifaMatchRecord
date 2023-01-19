@@ -1,3 +1,4 @@
+const body = document.body;
 const criteriaUser = document.querySelector('#criteria-user');
 const targetUser = document.querySelector('#target-user');
 const searchForm = document.querySelector('#search-form');
@@ -5,6 +6,7 @@ const matchInfoTableBody = document.querySelector('#match-info-table tbody');
 const viewMoreBtn = document.querySelector('#view-more-btn');
 const summaryValues = document.querySelectorAll('#summary-values td')
 
+let isLoading = false;
 let offset = 0;
 const summary = {
     totalMatches:0,
@@ -60,20 +62,29 @@ const appendMatches = (filteredMatches) => {
         let [userA, userB] = match['matchInfo'];
         let trColor;
         if (userA.nickname !== criteriaUser.value) [userA, userB] = [userB, userA];
-
+        let matchResultUserA;
+        let matchResultUserB;
         if (userA['shoot']['goalTotalDisplay'] > userB['shoot']['goalTotalDisplay']) {
             trColor = 'skyblue';
+            matchResultUserA = '승';
+            matchResultUserB = '패';
             summary.totalWinsOfUserA += 1;
         } else if(userA['shoot']['goalTotalDisplay'] < userB['shoot']['goalTotalDisplay']) {
             trColor = 'pink';
+            matchResultUserA = '패';
+            matchResultUserB = '승';
             summary.totalWinsOfUserB += 1;
-        } else trColor = 'gray'
+        } else {
+            matchResultUserA = '무';
+            matchResultUserB = '무';
+            trColor = 'gray'
+        }
 
         summary.totalGoalsOfUserA += userA['shoot']['goalTotalDisplay'];
         summary.totalGoalsOfUserB += userB['shoot']['goalTotalDisplay'];
 
         const html = `<tr class=${trColor}>
-                        <td>${userA['matchDetail']['matchResult']}<br>${userB['matchDetail']['matchResult']}</td>
+                        <td>${matchResultUserA}<br>${matchResultUserB}</td>
                         <td>${userA['shoot']['shootTotal']}<br>${userB['shoot']['shootTotal']}</td>
                         <td>${userA['shoot']['effectiveShootTotal']}<br>${userB['shoot']['effectiveShootTotal']}</td>
                         <td>${userA['shoot']['goalTotalDisplay']}<br>${userB['shoot']['goalTotalDisplay']}</td>
@@ -98,10 +109,21 @@ viewMoreBtn.addEventListener('click',async () => {
 })
 searchForm.addEventListener('submit',async (e) => {
         e.preventDefault();
-        offset = 0;
-        const oldResults = matchInfoTableBody.querySelectorAll("tr:not([id='table-title'])");
-        oldResults.forEach(tr => tr.remove());
-        const filteredMatches = await getMatches();
-        appendMatches(filteredMatches);
+        if(!isLoading) {
+            offset = 0;
+            summary.totalMatches = 0;
+            summary.totalGoalsOfUserA = 0;
+            summary.totalGoalsOfUserB = 0;
+            summary.totalWinsOfUserA = 0;
+            summary.totalWinsOfUserB = 0;
+            isLoading = true;
+            body.style.cursor = 'wait';
+            const oldResults = matchInfoTableBody.querySelectorAll("tr:not([id='table-title'])");
+            oldResults.forEach(tr => tr.remove());
+            const filteredMatches = await getMatches();
+            appendMatches(filteredMatches);
+            body.style.cursor = 'auto';
+            isLoading = false;
+        }
     }
 )
